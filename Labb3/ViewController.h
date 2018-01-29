@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomTableView.h"
+#import "Model.h"
 
-@interface ViewController : UIViewController
-
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic) CustomTableView *tableView;
+@property (nonatomic) Model *engine;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *addBtn;
 
 @end
 

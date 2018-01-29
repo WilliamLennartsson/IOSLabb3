@@ -13,6 +13,8 @@
 		72059644201F6E6900E662E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72059643201F6E6900E662E9 /* Assets.xcassets */; };
 		72059647201F6E6900E662E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72059645201F6E6900E662E9 /* LaunchScreen.storyboard */; };
 		7205964A201F6E6900E662E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72059649201F6E6900E662E9 /* main.m */; };
+		72059652201F6E8500E662E9 /* CustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72059651201F6E8500E662E9 /* CustomTableView.m */; };
+		72059655201F6E9100E662E9 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 72059654201F6E9100E662E9 /* Model.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		72059646201F6E6900E662E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72059648201F6E6900E662E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72059649201F6E6900E662E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72059650201F6E8500E662E9 /* CustomTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableView.h; sourceTree = "<group>"; };
+		72059651201F6E8500E662E9 /* CustomTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableView.m; sourceTree = "<group>"; };
+		72059653201F6E9100E662E9 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		72059654201F6E9100E662E9 /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,10 @@
 				7205963B201F6E6900E662E9 /* AppDelegate.m */,
 				7205963D201F6E6900E662E9 /* ViewController.h */,
 				7205963E201F6E6900E662E9 /* ViewController.m */,
+				72059650201F6E8500E662E9 /* CustomTableView.h */,
+				72059651201F6E8500E662E9 /* CustomTableView.m */,
+				72059653201F6E9100E662E9 /* Model.h */,
+				72059654201F6E9100E662E9 /* Model.m */,
 				72059640201F6E6900E662E9 /* Main.storyboard */,
 				72059643201F6E6900E662E9 /* Assets.xcassets */,
 				72059645201F6E6900E662E9 /* LaunchScreen.storyboard */,
@@ -144,7 +154,9 @@
 			files = (
 				7205963F201F6E6900E662E9 /* ViewController.m in Sources */,
 				7205964A201F6E6900E662E9 /* main.m in Sources */,
+				72059652201F6E8500E662E9 /* CustomTableView.m in Sources */,
 				7205963C201F6E6900E662E9 /* AppDelegate.m in Sources */,
+				72059655201F6E9100E662E9 /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
