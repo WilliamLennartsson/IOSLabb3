@@ -13,7 +13,11 @@
     
 }
 -(void) deleteToDoItem: (NSInteger)index{
+    NSLog(@"Before removal %ld", self.toDoArray.count);
+
     [self.toDoArray removeObjectAtIndex:index];
+    NSLog(@"Delete index! %ld", index);
+    NSLog(@"After removal %ld", self.toDoArray.count);
 }
 
 - (instancetype)init
@@ -35,11 +39,12 @@
 -(void) addToDo:(NSString*)inputText{
     
     [self.toDoArray addObject:inputText];
+    
     [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 -(NSUInteger) getArrayLen {
-    return (int)self.toDoArray.count;
+    return self.toDoArray.count;
 }
 @end

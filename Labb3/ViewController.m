@@ -48,14 +48,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         [self.engine deleteToDoItem:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        if ([self.engine getArrayLen] != self.toDoList.count){
+        
+        //if ([self.engine getArrayLen] != self.toDoList.count){
+            NSLog(@"Inside if");
             [self loadView];
-        } else {
-            NSLog(@"Unhandled editing style! %ld", (long)editingStyle);
-        }
+            
+        //} else {
+        //    NSLog(@"Unhandled editing style! %ld", (long)editingStyle);
+        //}
     }
 }
 
@@ -76,6 +81,8 @@
     if ([self.engine getArrayLen] != self.toDoList.count){
         [self loadView];
     }
+    [self loadView];
+
 }
 
 - (void)didReceiveMemoryWarning {

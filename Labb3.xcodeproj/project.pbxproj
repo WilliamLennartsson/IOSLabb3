@@ -66,10 +66,10 @@
 			children = (
 				7205963A201F6E6900E662E9 /* AppDelegate.h */,
 				7205963B201F6E6900E662E9 /* AppDelegate.m */,
-				7205963D201F6E6900E662E9 /* ViewController.h */,
-				7205963E201F6E6900E662E9 /* ViewController.m */,
 				72059650201F6E8500E662E9 /* CustomTableView.h */,
 				72059651201F6E8500E662E9 /* CustomTableView.m */,
+				7205963D201F6E6900E662E9 /* ViewController.h */,
+				7205963E201F6E6900E662E9 /* ViewController.m */,
 				72059653201F6E9100E662E9 /* Model.h */,
 				72059654201F6E9100E662E9 /* Model.m */,
 				72059640201F6E6900E662E9 /* Main.storyboard */,
