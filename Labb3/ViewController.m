@@ -34,7 +34,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"SimpleTableCell";
+    static NSString *simpleTableIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -77,12 +77,14 @@
 - (IBAction)addBtnPressed:(id)sender {
     NSString *inputText = [[NSString alloc] init];
     inputText = self.textField.text;
+    
+    
     [self.engine addToDo:inputText];
-    if ([self.engine getArrayLen] != self.toDoList.count){
+        if ([self.engine getArrayLen] != self.toDoList.count){
+            [self loadView];
+        }
         [self loadView];
-    }
-    [self loadView];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {

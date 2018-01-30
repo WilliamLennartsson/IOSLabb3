@@ -25,25 +25,30 @@
     self = [super init];
     if (self) {
         
-        self.toDoArray = [[NSMutableArray alloc ] init];
+        if (!self.toDoArray){
+            self.toDoArray = [[NSMutableArray alloc ] init];
+        }
         
         self.toDoArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"bror"] mutableCopy];
+        
         if (self.toDoArray.count == 0){
             self.toDoArray = @[@"Hund", @"Vaska Skump", @"Köra hoj"].mutableCopy;
         }
     }
-        
     return self;
 }
 
 -(void) addToDo:(NSString*)inputText{
     
-    [self.toDoArray addObject:inputText];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    if ([inputText isEqualToString:@""]){
+        NSLog(@"Won't add empty strings");
+    } else {
+        [self.toDoArray addObject:inputText];
+        [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
+
 -(NSUInteger) getArrayLen {
     return self.toDoArray.count;
 }
