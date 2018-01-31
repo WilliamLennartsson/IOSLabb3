@@ -15,6 +15,7 @@
 		7205964A201F6E6900E662E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72059649201F6E6900E662E9 /* main.m */; };
 		72059652201F6E8500E662E9 /* CustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72059651201F6E8500E662E9 /* CustomTableView.m */; };
 		72059655201F6E9100E662E9 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 72059654201F6E9100E662E9 /* Model.m */; };
+		720596AE2021B31600E662E9 /* SpecInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 720596AD2021B31600E662E9 /* SpecInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		72059651201F6E8500E662E9 /* CustomTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableView.m; sourceTree = "<group>"; };
 		72059653201F6E9100E662E9 /* Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		72059654201F6E9100E662E9 /* Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		720596AC2021B31600E662E9 /* SpecInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpecInfoViewController.h; sourceTree = "<group>"; };
+		720596AD2021B31600E662E9 /* SpecInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpecInfoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				7205963E201F6E6900E662E9 /* ViewController.m */,
 				72059653201F6E9100E662E9 /* Model.h */,
 				72059654201F6E9100E662E9 /* Model.m */,
+				720596AC2021B31600E662E9 /* SpecInfoViewController.h */,
+				720596AD2021B31600E662E9 /* SpecInfoViewController.m */,
 				72059640201F6E6900E662E9 /* Main.storyboard */,
 				72059643201F6E6900E662E9 /* Assets.xcassets */,
 				72059645201F6E6900E662E9 /* LaunchScreen.storyboard */,
@@ -153,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7205963F201F6E6900E662E9 /* ViewController.m in Sources */,
+				720596AE2021B31600E662E9 /* SpecInfoViewController.m in Sources */,
 				7205964A201F6E6900E662E9 /* main.m in Sources */,
 				72059652201F6E8500E662E9 /* CustomTableView.m in Sources */,
 				7205963C201F6E6900E662E9 /* AppDelegate.m in Sources */,
