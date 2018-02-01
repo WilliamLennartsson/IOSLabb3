@@ -32,21 +32,32 @@
         self.toDoArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"bror"] mutableCopy];
         
         if (self.toDoArray.count == 0){
-            self.toDoArray = @[@"Hund", @"Vaska Skump", @"Köra hoj"].mutableCopy;
+            self.toDoArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
+                                 @{@"Title": @"Vaska Skump", @"InfoText": @""},
+                                 @{@"Title": @"Köra hoj", @"InfoText": @""},
+                                 ].mutableCopy;
         }
     }
     return self;
 }
 
--(void) addToDo:(NSString*)inputText{
-    
-    if ([inputText isEqualToString:@""]){
+-(void) addToDo:(NSMutableDictionary*)inputText{
+    if ([inputText[@"Title"] isEqualToString:@""]){
         NSLog(@"Won't add empty strings");
     } else {
         [self.toDoArray addObject:inputText];
         [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+-(void) addInfoText :(NSMutableDictionary*)d onIndex: (int) index{
+    [self.toDoArray[index] setValue:@"InfoText" forKey:d[@"InfoText"]];
+    //[self.toDoArray[index] setValue:d[@"InfoText"] forKey:@"InfoText"];
+    
+    //self.toDoArray[index][@"InfoText"] = d[@"InfoText"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 -(NSUInteger) getArrayLen {

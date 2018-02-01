@@ -9,6 +9,10 @@
 #import "ViewController.h"
 
 @interface SpecInfoViewController : ViewController
-
+@property (nonatomic) NSString *infoTitle;
+@property (nonatomic) IBOutlet UITextView *specInfoTextView;
+@property (nonatomic) NSString *infoText;
+@property (nonatomic, getter = isFavorite) BOOL favorite;
+@property (nonatomic) NSMutableDictionary *infoDic;
 
 @end

@@ -11,7 +11,7 @@
 #import "Model.h"
 
 @interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic) CustomTableView *tableView;
+@property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) Model *engine;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;

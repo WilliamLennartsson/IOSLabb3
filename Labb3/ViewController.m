@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "SpecInfoViewController.h"
 
 @interface ViewController ()
 @property (nonatomic) NSMutableArray *toDoList;
+@property (nonatomic) NSDictionary *currentD;
 
 @end
 
@@ -21,12 +23,15 @@
     self.engine = [[Model alloc]init];
     self.toDoList = [[NSMutableArray alloc] init];
     self.toDoList = self.engine.toDoArray;
+    
 
     
 
     // Do any additional setup after loading the view, typically from a nib.
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadView];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.engine getArrayLen];
 }
@@ -34,7 +39,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *simpleTableIdentifier = @"Cell";
+    static NSString *simpleTableIdentifier = @"theCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -42,7 +47,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     
-    cell.textLabel.text = [[self.engine toDoArray] objectAtIndex:indexPath.row];
+    NSDictionary *d;
+    if (!d) d = [[NSDictionary alloc] init];
+    d = [[self.engine toDoArray] objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = d[@"Title"];
+    if (![d[@"InfoText"]isEqualToString:@""]){
+        [cell setBackgroundColor:[UIColor greenColor]];
+    }
     
     return cell;
 }
@@ -54,13 +66,8 @@
         [self.engine deleteToDoItem:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        //if ([self.engine getArrayLen] != self.toDoList.count){
-            NSLog(@"Inside if");
             [self loadView];
-            
-        //} else {
-        //    NSLog(@"Unhandled editing style! %ld", (long)editingStyle);
-        //}
+
     }
 }
 
@@ -68,22 +75,50 @@
     [super loadViewIfNeeded];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    if ([segue.identifier isEqualToString:@"cellInfo"]){
+        UITableViewCell *cell = sender;
+        
+        int cellRow = (int)[self.tableView indexPathForCell:cell].row;
+        NSLog(@"%d", cellRow);
+        SpecInfoViewController *infoController = [segue destinationViewController];
+
+
+        
+        //infoController.infoTitle = self.engine.toDoArray[cellRow][@"Title"];
+        
+        //infoController.infoText = self.engine.toDoArray[cellRow][@"InfoText"];
+        
+        
+        
+        
+        infoController.infoDic = self.engine.toDoArray[cellRow];
+        
+ 
+    }
+}
+
 -(void)loadView{
+    
     [super loadView];
     self.toDoList = self.engine.toDoArray;
     [self.tableView reloadData];
 }
 
+
 - (IBAction)addBtnPressed:(id)sender {
-    NSString *inputText = [[NSString alloc] init];
-    inputText = self.textField.text;
     
+    NSMutableDictionary *inputTitle = [[NSMutableDictionary alloc] init];
+    inputTitle = @{@"Title":self.textField.text,
+                   @"InfoText":@""
+                   }.mutableCopy;
     
-    [self.engine addToDo:inputText];
-        if ([self.engine getArrayLen] != self.toDoList.count){
+    [self.engine addToDo:inputTitle];
+    if ([self.engine getArrayLen] != self.toDoList.count){
             [self loadView];
-        }
-        [self loadView];
+    }
+    [self loadView];
     
 }
 
