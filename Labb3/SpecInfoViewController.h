@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Model.h"
 
 @interface SpecInfoViewController : ViewController
 @property (nonatomic) NSString *infoTitle;
@@ -14,5 +15,10 @@
 @property (nonatomic) NSString *infoText;
 @property (nonatomic, getter = isFavorite) BOOL favorite;
 @property (nonatomic) NSMutableDictionary *infoDic;
+@property (nonatomic) Model *engine;
+@property (nonatomic) int cellIndex;
+-(void) textFieldTextSet;
+
+
 
 @end

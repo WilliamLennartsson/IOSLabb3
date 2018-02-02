@@ -20,6 +20,7 @@
     NSLog(@"After removal %ld", self.toDoArray.count);
 }
 
+
 - (instancetype)init
 {
     self = [super init];
@@ -50,15 +51,18 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
--(void) addInfoText :(NSMutableDictionary*)d onIndex: (int) index{
-    [self.toDoArray[index] setValue:@"InfoText" forKey:d[@"InfoText"]];
-    //[self.toDoArray[index] setValue:d[@"InfoText"] forKey:@"InfoText"];
-    
-    //self.toDoArray[index][@"InfoText"] = d[@"InfoText"];
+
+
+-(void) addInfoTextOnIndex :(NSDictionary*) toDo atIndex :(int) index{
+    //[self.toDoArray removeObjectAtIndex:index];
+    //[self.toDoArray addObject:toDo];
+    [self.toDoArray replaceObjectAtIndex:index withObject:toDo];
+    //self.toDoArray[index] = toDo;
     [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
 }
+
+
 
 -(NSUInteger) getArrayLen {
     return self.toDoArray.count;

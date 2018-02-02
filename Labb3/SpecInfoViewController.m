@@ -10,71 +10,58 @@
 
 @interface SpecInfoViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
-
+@property (nonatomic) BOOL isFavorite;
 @end
 
 @implementation SpecInfoViewController
+
 -(void)viewWillDisappear:(BOOL)animated{
-    //[self.infoDic setValue:self.specInfoTextView.text forKey:@"TextInfo"];
+    
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    
-    
+    [self textFieldTextSet];
     self.title = self.infoDic[@"Title"];
     
-    //NSString *hej = self.infoDic[@"InfoText"];
-    //NSLog(@"%@ D object", self.infoDic);
-    //NSLog(@"%@ D InfoText ", self.infoDic[@"InfoText"]);
-    //NSLog(@"string hej %@", hej);
-    //NSLog(@"%@", self.specInfoTextView);
-    
-    //[self.specInfoTextView setText:@"wdasdaw"];
-    
-    
+}
 
-    //self.specInfoTextView.text = (@"%@",self.infoDic[@"InfoText"]);
-    
-}
 - (IBAction)favoriteSwitch:(id)sender {
-    [self.specInfoTextView setText: self.infoDic[@"InfoText"]];
+    [self textFieldTextSet];
+    self.isFavorite = !self.isFavorite;
+    if (self.isFavorite){
+        [self.infoDic setValue:@"fav" forKey:@"true"];
+    } else if (!self.isFavorite){
+        
+    }
     
-    //NSLog(@" %@", );
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [self textFieldTextSet];
+}
+-(void) textFieldTextSet{
+    [self.specInfoTextView setText: self.infoDic[@"InfoText"]];
+}
+
 - (IBAction)onClickSaveBtn:(id)sender {
+    NSLog(@"infodic = %@", self.infoDic);
+
     NSString *temp = [self.specInfoTextView text];
-    //temp = [NSString stringWithFormat:@"%@", temp];
-    //[self.infoDic[@"InfoText"] setValue:temp forKey:@"InfoText"];
+    
     NSLog(@"saveTemp %@ ", temp);
-    //[self.infoDic[@"InfoText"] setString:temp];
-    [self.infoDic setValue:temp forKeyPath:@"InfoText"];
-    
-    [self.infoDic valueForKey:@"InfoText"];
-    
-    NSMutableDictionary *b = @(@"InfoText":@"", @"":@""];
-    [self.infoDic willChange:<#(NSKeyValueChange)#> valuesAtIndexes:<#(nonnull NSIndexSet *)#> forKey:<#(nonnull NSString *)#>];
+    NSLog(@"%@ infoDic", self.infoDic);
     
     
+    NSDictionary *b = @{@"Title":self.title, @"InfoText":self.specInfoTextView.text};
+    self.infoDic = b.mutableCopy;
+    [self.engine addInfoTextOnIndex:b atIndex:self.cellIndex];
+
+    NSLog(@"b = %@", b);
     
-    //NSLog(@"%@", self.infoDic);
-    //[self.infoDic setValue:@"InfoText" forKey:temp];
-    
-    //[self.infoDic[@"InfoText"] setValue:<#(nullable id)#> forKey:<#(nonnull NSString *)#>];
-    
-    
-    //NSString *temp = self.specInfoTextView.text;
-    //[self.infoDic setValue:temp forKey:@"TextInfo"];
-    //self.infoText = self.textField.text;
-    //[self.navigationController popViewControllerAnimated:YES];
 
 }
 -(void) saveButton {
-    //[self.animals addObject:self.animalName.text];
-    //[self.navigationController popViewControllerAnimated:YES];
-    
+
 }
 
 

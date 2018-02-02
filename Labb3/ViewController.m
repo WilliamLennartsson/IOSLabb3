@@ -12,6 +12,7 @@
 @interface ViewController ()
 @property (nonatomic) NSMutableArray *toDoList;
 @property (nonatomic) NSDictionary *currentD;
+@property (nonatomic) int previousRowIndex;
 
 @end
 
@@ -30,7 +31,12 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
+    self.toDoList = self.engine.toDoArray;
+    if ([self.engine getArrayLen] != self.toDoList.count){
+        [self loadView];
+    }
     [self loadView];
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.engine getArrayLen];
@@ -62,12 +68,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
         [self.engine deleteToDoItem:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-            [self loadView];
-
+        [self loadView];
     }
 }
 
@@ -81,28 +84,28 @@
         UITableViewCell *cell = sender;
         
         int cellRow = (int)[self.tableView indexPathForCell:cell].row;
+        self.previousRowIndex = cellRow;
         NSLog(@"%d", cellRow);
         SpecInfoViewController *infoController = [segue destinationViewController];
+        
 
-
-        
-        //infoController.infoTitle = self.engine.toDoArray[cellRow][@"Title"];
-        
-        //infoController.infoText = self.engine.toDoArray[cellRow][@"InfoText"];
-        
+        infoController.infoDic = [self.engine.toDoArray[cellRow] mutableCopy];
+        infoController.engine = self.engine;
+        infoController.cellIndex = cellRow;
+        [infoController textFieldTextSet];
         
         
-        
-        infoController.infoDic = self.engine.toDoArray[cellRow];
-        
- 
     }
 }
 
 -(void)loadView{
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    
+    self.engine.toDoArray = [[settings arrayForKey:@"bror"] mutableCopy];
     
     [super loadView];
     self.toDoList = self.engine.toDoArray;
+    
     [self.tableView reloadData];
 }
 
