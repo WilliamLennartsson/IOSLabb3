@@ -58,7 +58,7 @@
     d = [[self.engine toDoArray] objectAtIndex:indexPath.row];
     
     cell.textLabel.text = d[@"Title"];
-    if (![d[@"InfoText"]isEqualToString:@""]){
+    if ([d[@"Important"]isEqualToString:@"YES"]){
         [cell setBackgroundColor:[UIColor greenColor]];
     }
     
@@ -114,7 +114,8 @@
     
     NSMutableDictionary *inputTitle = [[NSMutableDictionary alloc] init];
     inputTitle = @{@"Title":self.textField.text,
-                   @"InfoText":@""
+                   @"InfoText":@"",
+                   @"Important": @"NO"
                    }.mutableCopy;
     
     [self.engine addToDo:inputTitle];

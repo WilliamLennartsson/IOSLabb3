@@ -27,7 +27,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rbt-Ky-uHa" id="U7z-XB-Wyq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -114,6 +114,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="XA3-nL-nes"/>
                     <connections>
+                        <outlet property="importantSlider" destination="bcH-5Q-0A3" id="opY-ff-ql8"/>
                         <outlet property="saveBtn" destination="qV6-tE-Q3h" id="tud-iA-smI"/>
                         <outlet property="specInfoTextView" destination="toF-BU-hVe" id="a6g-jf-Quo"/>
                     </connections>

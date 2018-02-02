@@ -9,8 +9,8 @@
 #import "SpecInfoViewController.h"
 
 @interface SpecInfoViewController ()
+@property (weak, nonatomic) IBOutlet UISwitch *importantSlider;
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
-@property (nonatomic) BOOL isFavorite;
 @end
 
 @implementation SpecInfoViewController
@@ -27,13 +27,7 @@
 }
 
 - (IBAction)favoriteSwitch:(id)sender {
-    [self textFieldTextSet];
-    self.isFavorite = !self.isFavorite;
-    if (self.isFavorite){
-        [self.infoDic setValue:@"fav" forKey:@"true"];
-    } else if (!self.isFavorite){
-        
-    }
+   
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -41,6 +35,11 @@
 }
 -(void) textFieldTextSet{
     [self.specInfoTextView setText: self.infoDic[@"InfoText"]];
+    if ([self.infoDic[@"Important"] isEqualToString:@"YES"]){
+        [self.importantSlider setOn:YES];
+    } else {
+        [self.importantSlider setOn:NO];
+    }
 }
 
 - (IBAction)onClickSaveBtn:(id)sender {
@@ -51,8 +50,14 @@
     NSLog(@"saveTemp %@ ", temp);
     NSLog(@"%@ infoDic", self.infoDic);
     
-    
-    NSDictionary *b = @{@"Title":self.title, @"InfoText":self.specInfoTextView.text};
+    BOOL boll = [self.importantSlider isOn];
+    NSString *important;
+    if (boll) {
+        important = @"YES";
+    } else {
+        important = @"NO";
+    }
+    NSDictionary *b = @{@"Title":self.title, @"InfoText":self.specInfoTextView.text, @"Important":important};
     self.infoDic = b.mutableCopy;
     [self.engine addInfoTextOnIndex:b atIndex:self.cellIndex];
 
