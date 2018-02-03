@@ -14,6 +14,7 @@
 @property (nonatomic) IBOutlet UITextView *specInfoTextView;
 @property (nonatomic) NSString *infoText;
 @property (nonatomic) BOOL favorite;
+@property (nonatomic) BOOL isDone;
 @property (nonatomic) NSMutableDictionary *infoDic;
 @property (nonatomic) Model *engine;
 @property (nonatomic) int cellIndex;

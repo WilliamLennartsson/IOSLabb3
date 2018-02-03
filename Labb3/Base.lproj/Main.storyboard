@@ -108,12 +108,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DuL-c5-W2z">
+                                <rect key="frame" x="312" y="131" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mark as Done" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VT2-MZ-0zg">
+                                <rect key="frame" x="175" y="138" width="129" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.28042017489999999" green="0.28042017489999999" blue="0.28042017489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.78794931994818651" green="0.78794931994818651" blue="0.78794931994818651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="kL0-ws-NHD"/>
                     </view>
                     <navigationItem key="navigationItem" id="XA3-nL-nes"/>
                     <connections>
+                        <outlet property="doneSlider" destination="DuL-c5-W2z" id="UdK-WJ-ymG"/>
                         <outlet property="importantSlider" destination="bcH-5Q-0A3" id="opY-ff-ql8"/>
                         <outlet property="saveBtn" destination="qV6-tE-Q3h" id="tud-iA-smI"/>
                         <outlet property="specInfoTextView" destination="toF-BU-hVe" id="a6g-jf-Quo"/>

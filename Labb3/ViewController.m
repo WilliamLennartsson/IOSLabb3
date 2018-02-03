@@ -21,16 +21,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.engine = [[Model alloc]init];
+    
     self.toDoList = [[NSMutableArray alloc] init];
     self.toDoList = self.engine.toDoArray;
-    
-
-    
-
-    // Do any additional setup after loading the view, typically from a nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
+    self.engine = [[Model alloc]init];
+
     self.toDoList = self.engine.toDoArray;
     if ([self.engine getArrayLen] != self.toDoList.count){
         [self loadView];
@@ -38,8 +35,26 @@
     [self loadView];
     
 }
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (section == 0){
+        return @"To Do";
+    } else if (section == 1){
+        return @"Done";
+    } else return @"";
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.engine getArrayLen];
+    NSInteger i = 0;
+    
+    if (section == 0){
+        i = [self.engine getArrayLen];
+    } else if (section == 1){
+        i = [self.engine.doneArray count];
+    }
+    return i;
 }
 
 
@@ -55,11 +70,23 @@
     
     NSDictionary *d;
     if (!d) d = [[NSDictionary alloc] init];
-    d = [[self.engine toDoArray] objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = d[@"Title"];
-    if ([d[@"Important"]isEqualToString:@"YES"]){
-        [cell setBackgroundColor:[UIColor greenColor]];
+    if (indexPath.section == 0){
+        
+        d = [[self.engine toDoArray] objectAtIndex:indexPath.row];
+        cell.textLabel.text = d[@"Title"];
+        
+        if ([d[@"Important"]isEqualToString:@"YES"]){
+            [cell setBackgroundColor:[UIColor greenColor]];
+        }
+        
+    } else if(indexPath.section == 1) {
+        d = [[self.engine doneArray] objectAtIndex:indexPath.row];
+        cell.textLabel.text = d[@"Title"];
+        
+        if ([d[@"Important"]isEqualToString:@"YES"]){
+            [cell setBackgroundColor:[UIColor greenColor]];
+        }
     }
     
     return cell;
@@ -68,8 +95,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.engine deleteToDoItem:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        if (indexPath.section == 0){
+            [self.engine deleteToDoItem:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+        if (indexPath.section == 1){
+            [self.engine deleteDoneItem:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
         [self loadView];
     }
 }
@@ -84,31 +117,30 @@
         UITableViewCell *cell = sender;
         
         int cellRow = (int)[self.tableView indexPathForCell:cell].row;
+        int cellSection = (int) [self.tableView indexPathForCell:cell].section;
+        
         self.previousRowIndex = cellRow;
         NSLog(@"%d", cellRow);
         SpecInfoViewController *infoController = [segue destinationViewController];
         
-
-        infoController.infoDic = [self.engine.toDoArray[cellRow] mutableCopy];
+        if (cellSection == 0){
+            infoController.infoDic = [self.engine.toDoArray[cellRow] mutableCopy];
+            infoController.isDone = NO;
+        } else if (cellSection == 1){
+            infoController.infoDic = [self.engine.doneArray[cellRow] mutableCopy];
+            infoController.isDone = YES;
+        }
+        
         infoController.engine = self.engine;
         infoController.cellIndex = cellRow;
         [infoController textFieldTextSet];
-        
-        
     }
 }
 
 -(void)loadView{
-    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-    
-    self.engine.toDoArray = [[settings arrayForKey:@"bror"] mutableCopy];
-    
     [super loadView];
-    self.toDoList = self.engine.toDoArray;
-    
     [self.tableView reloadData];
 }
-
 
 - (IBAction)addBtnPressed:(id)sender {
     

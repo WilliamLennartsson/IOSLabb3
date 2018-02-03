@@ -13,11 +13,12 @@
     
 }
 -(void) deleteToDoItem: (NSInteger)index{
-    NSLog(@"Before removal %ld", self.toDoArray.count);
-
     [self.toDoArray removeObjectAtIndex:index];
-    NSLog(@"Delete index! %ld", index);
-    NSLog(@"After removal %ld", self.toDoArray.count);
+    [self saveArrays];
+}
+-(void) deleteDoneItem: (NSInteger) index {
+    [self.doneArray removeObjectAtIndex:index];
+    [self saveArrays];
 }
 
 
@@ -26,14 +27,21 @@
     self = [super init];
     if (self) {
         
-        if (!self.toDoArray){
+        
             self.toDoArray = [[NSMutableArray alloc ] init];
-        }
+            self.doneArray = [[NSMutableArray alloc] init];
+        
         
         self.toDoArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"bror"] mutableCopy];
-        
+        self.doneArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"syster"] mutableCopy];
         if (self.toDoArray.count == 0){
             self.toDoArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
+                                 @{@"Title": @"Vaska Skump", @"InfoText": @""},
+                                 @{@"Title": @"Köra hoj", @"InfoText": @""},
+                                 ].mutableCopy;
+        }
+        if (self.doneArray.count == 0){
+            self.doneArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
                                  @{@"Title": @"Vaska Skump", @"InfoText": @""},
                                  @{@"Title": @"Köra hoj", @"InfoText": @""},
                                  ].mutableCopy;
@@ -47,23 +55,33 @@
         NSLog(@"Won't add empty strings");
     } else {
         [self.toDoArray addObject:inputText];
-        [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self saveArrays];
     }
 }
 
+-(void) moveObjectToDone :(NSDictionary*) d :(int) index{
+    [self.doneArray addObject:d];
+    [self.toDoArray removeObjectAtIndex:index];
+    [self saveArrays];
+}
+-(void) saveArrays{
+    [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.doneArray forKey:@"syster"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 -(void) addInfoTextOnIndex :(NSDictionary*) toDo atIndex :(int) index{
     //[self.toDoArray removeObjectAtIndex:index];
     //[self.toDoArray addObject:toDo];
-    [self.toDoArray replaceObjectAtIndex:index withObject:toDo];
+    [self.toDoArray replaceObjectAtIndex:index withObject:toDo];    
     //self.toDoArray[index] = toDo;
-    [[NSUserDefaults standardUserDefaults] setObject:self.toDoArray forKey:@"bror"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self saveArrays];
 }
-
-
-
+-(void) moveObjectToToDo :(NSDictionary*) d atIndex:(int) index{
+    [self.toDoArray addObject:d];
+    [self.doneArray removeObjectAtIndex:index];
+    [self saveArrays];
+}
 -(NSUInteger) getArrayLen {
     return self.toDoArray.count;
 }
