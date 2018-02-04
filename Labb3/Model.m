@@ -28,24 +28,24 @@
     if (self) {
         
         
-            self.toDoArray = [[NSMutableArray alloc ] init];
-            self.doneArray = [[NSMutableArray alloc] init];
+        self.toDoArray = [[NSMutableArray alloc] init];
+        self.doneArray = [[NSMutableArray alloc] init];
         
         
         self.toDoArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"bror"] mutableCopy];
         self.doneArray = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"syster"] mutableCopy];
-        if (self.toDoArray.count == 0){
-            self.toDoArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
-                                 @{@"Title": @"Vaska Skump", @"InfoText": @""},
-                                 @{@"Title": @"Köra hoj", @"InfoText": @""},
-                                 ].mutableCopy;
-        }
-        if (self.doneArray.count == 0){
-            self.doneArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
-                                 @{@"Title": @"Vaska Skump", @"InfoText": @""},
-                                 @{@"Title": @"Köra hoj", @"InfoText": @""},
-                                 ].mutableCopy;
-        }
+//        if (self.toDoArray.count == 0){
+//            self.toDoArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
+//                                 @{@"Title": @"Vaska Skump", @"InfoText": @""},
+//                                 @{@"Title": @"Köra hoj", @"InfoText": @""},
+//                                 ].mutableCopy;
+//        }
+//        if (self.doneArray.count == 0){
+//            self.doneArray = @[  @{@"Title": @"Hund", @"InfoText": @"Måste fan ut med hundan nu dirr"},
+//                                 @{@"Title": @"Vaska Skump", @"InfoText": @""},
+//                                 @{@"Title": @"Köra hoj", @"InfoText": @""},
+//                                 ].mutableCopy;
+//        }
     }
     return self;
 }
@@ -54,13 +54,25 @@
     if ([inputText[@"Title"] isEqualToString:@""]){
         NSLog(@"Won't add empty strings");
     } else {
-        [self.toDoArray addObject:inputText];
+        
+        if (!self.toDoArray){
+            self.toDoArray = @[inputText].mutableCopy;
+        } else {
+            [self.toDoArray addObject:inputText];
+            
+        }
         [self saveArrays];
     }
 }
 
 -(void) moveObjectToDone :(NSDictionary*) d :(int) index{
-    [self.doneArray addObject:d];
+    
+    if (!self.doneArray){
+        self.doneArray = @[d].mutableCopy;
+    } else {
+        [self.doneArray addObject:d];
+    }
+    
     [self.toDoArray removeObjectAtIndex:index];
     [self saveArrays];
 }
